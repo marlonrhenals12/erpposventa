@@ -11,6 +11,9 @@ defineProps({
     canResetPassword: {
         type: Boolean,
     },
+    canRegister: {
+        type: Boolean,
+    },
     status: {
         type: String,
     },
@@ -170,6 +173,16 @@ const submit = () => {
                             </svg>
                         </button>
                     </form>
+
+                    <p v-if="canRegister" class="mt-3 text-center text-xs text-[#73766e]">
+                        ¿No tienes cuenta?
+                        <Link
+                            :href="route('register')"
+                            class="font-bold text-[#064E3B] transition-colors hover:text-[#987a3d] focus:outline-none focus-visible:underline"
+                        >
+                            Crear cuenta
+                        </Link>
+                    </p>
                 </div>
 
                 <!-- Footer Izquierdo -->

@@ -119,10 +119,10 @@ DB_PASSWORD=tu_contraseña
 Habilita `pdo_mysql` en PHP y ejecuta las migraciones:
 
 ```powershell
-php artisan migrate --seed
+php artisan migrate
 ```
 
-No subas `.env` ni credenciales reales al repositorio.
+En producción, no ejecutes los seeders de desarrollo: crean cuentas con contraseñas conocidas. Configura los usuarios y contraseñas de forma segura para el entorno. No subas `.env` ni credenciales reales al repositorio.
 
 ## Roles y acceso
 
@@ -131,16 +131,20 @@ El sistema asigna los siguientes roles:
 - **Administrador (`admin`):** acceso al panel, operación POS, inventario, caja, domicilios, compras, proveedores, reportes y configuración.
 - **Vendedor (`vendedor`):** acceso al POS, su caja, consulta de inventario y seguimiento de sus domicilios. No puede administrar productos, compras, reportes ni configuración.
 
-El registro público crea usuarios con rol de vendedor. Las rutas operativas están protegidas por autenticación, verificación de correo y control de rol, según el módulo.
+### Registro inicial y usuarios
 
-El seeder crea estas cuentas de desarrollo:
+El registro público está pensado únicamente para el inicio de la instalación: el primer usuario que complete el formulario recibe el rol de administrador y el sistema deshabilita nuevos registros públicos. La disponibilidad de ese registro se controla con la tabla `registro_publico`.
+
+Después del registro inicial, el administrador puede crear usuarios adicionales y asignarles los roles disponibles desde **Configuración > Roles y usuarios**. Las rutas operativas están protegidas por autenticación, verificación de correo y control de rol, según el módulo.
+
+Para desarrollo local, `php artisan migrate --seed` crea estas cuentas:
 
 | Rol | Correo | Contraseña inicial |
 | --- | --- | --- |
 | Administrador | `admin@posventa.com` | `password` |
 | Vendedor | `vendedor@posventa.com` | `password` |
 
-Estas credenciales son únicamente para desarrollo local. 
+Estas credenciales y contraseñas son únicamente para desarrollo local; no las uses en producción. El seeder no completa el registro público inicial, por lo que este seguirá disponible hasta que se realice ese registro.
 
 ## Módulos disponibles
 

@@ -22,11 +22,18 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <Head title="Crear cuenta" />
 
         <form @submit.prevent="submit">
+            <div class="mb-6">
+                <h1 class="text-xl font-semibold text-gray-900">Crear cuenta</h1>
+                <p class="mt-1 text-sm text-gray-600">
+                    Regístrate con tu correo electrónico para comenzar.
+                </p>
+            </div>
+
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Nombre completo" />
 
                 <TextInput
                     id="name"
@@ -42,7 +49,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Correo electrónico" />
 
                 <TextInput
                     id="email"
@@ -57,7 +64,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Contraseña" />
 
                 <TextInput
                     id="password"
@@ -74,7 +81,7 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel
                     for="password_confirmation"
-                    value="Confirm Password"
+                    value="Confirmar contraseña"
                 />
 
                 <TextInput
@@ -92,12 +99,12 @@ const submit = () => {
                 />
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
+            <div class="mt-6 flex items-center justify-between gap-4">
                 <Link
                     :href="route('login')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    class="text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                    Already registered?
+                    Ya tengo cuenta
                 </Link>
 
                 <PrimaryButton
@@ -105,7 +112,7 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Register
+                    {{ form.processing ? 'Creando cuenta…' : 'Crear cuenta' }}
                 </PrimaryButton>
             </div>
         </form>
